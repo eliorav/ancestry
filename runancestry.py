@@ -83,7 +83,7 @@ def ancestry_pipeline_bam(matrixfile,bamfile,outfile,executable_dir_path):
 		make_ancestry_inputfile_simple(matrixfile,outfile + ".GLL",outfile + ".ancestry.input");
 		#python runancestry.py ancestry-data/hapmap3.allchroms.shared.matrix.hg19 ancestry-data/DM00231.bwamem.MD.GLL > ancestry-data/DM00231.bwamem.MD.input
 		print >>sys.stderr, "ancestry admixture calculations for",bamfile,"poolsize is ",POOLSIZE;
-		call(["time " + executable_dir_path + "/ANCESTRY -p " + `POOLSIZE` + " --pr 1 -i " + outfile + ".ancestry.input > " + outfile + '.ancestry.out'],shell=True);
+		call([executable_dir_path + "/ANCESTRY -p " + `POOLSIZE` + " --pr 1 -i " + outfile + ".ancestry.input > " + outfile + '.ancestry.out'],shell=True);
 		#call(["rm -f " + bamfile + ".GLL"],shell=True);
 		#call(["rm -f " + bamfile + ".forGLL"],shell=True);
 		#call(["rm -f " + bamfile + ".ancestry.input"],shell=True);
@@ -173,7 +173,7 @@ def make_ancestry_inputfile_plink(pedfile,mapfile,afmatrixfile,outfile,executabl
 		if WINDOW ==0: call(["" + executable_dir_path + "/ANCESTRY -p 2 --pr " + `PARSIMONY` + " --HWE " + `HWE_CHECK` + " -i " + outfilename +  " > " + outfilename + ".ancestry"],shell=True);
 		else: 
 			print >>sys.stderr, "calling BFGS method in windows";
-			call(["time " + executable_dir_path + "/ANCESTRY.1 -p 2 --pr " + `PARSIMONY` + " -i " + outfilename  + " > " + outfilename + ".ancestry"],shell=True);
+			call([executable_dir_path + "/ANCESTRY.1 -p 2 --pr " + `PARSIMONY` + " -i " + outfilename  + " > " + outfilename + ".ancestry"],shell=True);
 		#call(["rm -f " + outfilename],shell=True);
 		#call(["rm -f " + outfilename +  " " + outfilename + ".ancestry"],shell=True);
 		samples +=1;
@@ -250,11 +250,11 @@ def ancestry_pipeline_genotypes(matrixfile,genotype_file,outfile,executable_dir_
 	print >>sys.stderr, "making input file for ancestry calculations"; 
 	make_ancestry_inputfile_rsid(matrixfile,genotype_file,genotype_file + ".ancestry.input");
 	print >>sys.stderr, "ancestry admixture calculations",genotype_file
-	if WINDOW ==0: call(["time " + executable_dir_path + "/ANCESTRY --LRT 7.68 -p 2 --pr 1 -i " + genotype_file + ".ancestry.input > " + outfile],shell=True);
+	if WINDOW ==0: call([executable_dir_path + "/ANCESTRY --LRT 7.68 -p 2 --pr 1 -i " + genotype_file + ".ancestry.input > " + outfile],shell=True);
 	else: 
 		print >>sys.stderr, "calling BFGS method in windows";
-		call(["time " + executable_dir_path + "/ANCESTRY.1 -p 2 --pr 1 -i " + genotype_file + ".ancestry.input > " + outfile],shell=True);
-	#call(["time " + executable_dir_path + "/ANCESTRY -p 2 --pr 1 -i " + genotype_file + ".ancestry.input > " + outfile],shell=True);
+		call([executable_dir_path + "/ANCESTRY.1 -p 2 --pr 1 -i " + genotype_file + ".ancestry.input > " + outfile],shell=True);
+	#call([executable_dir_path + "/ANCESTRY -p 2 --pr 1 -i " + genotype_file + ".ancestry.input > " + outfile],shell=True);
 	#call(["time ./ANCESTRY --ea 1 -p 2 --pr 1 -i " + bamfile + ".ancestry.input > " + outfile],shell=True);
 	#call(["rm -f " + bamfile + ".ancestry.input"],shell=True);
 
