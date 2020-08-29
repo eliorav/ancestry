@@ -231,7 +231,7 @@ int compare_read_INDEL(struct alignedread* read,VARIANT* varlist,int ss,int star
 int extract_variants_read(struct alignedread* read,HASHTABLE* ht,CHROMVARS* chromvars,VARIANT* varlist,int paired,FRAGMENT* fragment,int chrom,REFLIST* reflist)
 {
 	int start = read->position; int end = start + read->span; int ss=0,firstvar=0,lastvar=0,j=0,ov=0,i=0;
-	j = (int)(start/BSIZE); 
+	j = (int)(ceil(start/BSIZE)) - 1;
 	if (j >= chromvars[chrom].blocks) return 0; // another BUG april29 2011 found here 
 	ss = chromvars[chrom].intervalmap[j]; 
 	if (ss < 0 || ss >= VARIANTS) return 0;
